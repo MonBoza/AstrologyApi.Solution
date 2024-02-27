@@ -9,5 +9,6 @@ namespace AstrologyApi.Models
     public AstrologyApiContext(DbContextOptions<AstrologyApiContext> options) : base(options)
     {
     }
+
   }
 }
