@@ -75,5 +75,20 @@ namespace AstrologyApi.Controllers
     {
       return _db.Signs.Any(e => e.SignId == id);
     }
+
+    [HttpDelete("{id}")]
+    public async Task<IActionResult> DeleteSign(int id)
+    {
+      Sign sign = await _db.Signs.FindAsync(id);
+      if (sign == null)
+      {
+        return NotFound();
+      }
+
+      _db.Signs.Remove(sign);
+      await _db.SaveChangesAsync();
+
+      return NoContent();
+    }
   }
 }
