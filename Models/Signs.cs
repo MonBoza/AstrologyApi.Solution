@@ -1,3 +1,5 @@
+using System.ComponentModel.DataAnnotations;
+
 namespace AstrologyApi.Models
 {
   public class Sign
