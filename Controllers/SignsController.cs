@@ -16,9 +16,31 @@ namespace AstrologyApi.Controllers
     }
 
     [HttpGet]
-    public async Task<ActionResult<IEnumerable<Sign>>> Get()
+    public async Task<ActionResult<IEnumerable<Sign>>> Get(string signName, string expression, string description, string concentration)
     {
-      return await _db.Signs.ToListAsync();
+      IQueryable<Sign> query = _db.Signs.AsQueryable();
+
+      if (signName != null)
+      {
+        query = query.Where(entry => entry.SignName == signName);
+      }
+
+      if (expression != null)
+      {
+        query = query.Where(entry => entry.Expression == expression);
+      }
+
+      if (description != null)
+      {
+        query = query.Where(entry => entry.Description == description);
+      }
+
+      if (concentration != null)
+      {
+        query = query.Where(entry => entry.Concentration == concentration);
+      }
+
+      return await query.ToListAsync();
     }
 
     [HttpGet("{id}")]
