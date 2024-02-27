@@ -22,7 +22,7 @@ namespace AstrologyApi.Controllers
     }
 
     [HttpGet("{id}")]
-    public async Task<ActionResult<Sign>> Sign(int id)
+    public async Task<ActionResult<Sign>> GetSign(int id)
     {
       Sign sign = await _db.Signs.FindAsync(id);
 
@@ -34,5 +34,12 @@ namespace AstrologyApi.Controllers
       return sign;
     }
 
+    [HttpPost]
+    public async Task<ActionResult<Sign>> Post(Sign sign)
+    {
+      _db.Signs.Add(sign);
+      await _db.SaveChangesAsync();
+      return CreatedAtAction(nameof(GetSign), new { id = sign.SignId }, sign);
+    }
   }
 }
