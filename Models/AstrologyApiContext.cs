@@ -10,5 +10,12 @@ namespace AstrologyApi.Models
     {
     }
 
+    protected override void OnModelCreating(ModelBuilder builder)
+    {
+      builder.Entity<Sign>()
+        .HasData(
+          new Sign { SignId = 1, SignName = "Aries", Expression = "dominant",   Description = "idealist", Concentration = "action" }
+        );
+    }
   }
 }

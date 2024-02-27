@@ -33,5 +33,6 @@ namespace AstrologyApi.Controllers
 
       return sign;
     }
+
   }
 }
