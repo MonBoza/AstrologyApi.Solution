@@ -41,5 +41,39 @@ namespace AstrologyApi.Controllers
       await _db.SaveChangesAsync();
       return CreatedAtAction(nameof(GetSign), new { id = sign.SignId }, sign);
     }
+
+    [HttpPut("{id}")]
+    public async Task<IActionResult> Put(int id, Sign sign)
+    {
+      if (id != sign.SignId)
+      {
+        return BadRequest();
+      }
+
+      _db.Signs.Update(sign);
+
+      try
+      {
+        await _db.SaveChangesAsync();
+      }
+      catch (DbUpdateConcurrencyException)
+      {
+        if (!SignExists(id))
+        {
+          return NotFound();
+        }
+        else
+        {
+          throw;
+        }
+      }
+
+      return NoContent();
+    }
+
+    private bool SignExists(int id)
+    {
+      return _db.Signs.Any(e => e.SignId == id);
+    }
   }
 }
