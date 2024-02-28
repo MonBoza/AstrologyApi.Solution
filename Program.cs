@@ -1,7 +1,19 @@
 using AstrologyApi.Models;
 using Microsoft.EntityFrameworkCore;
 
+var  MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
+
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(name: MyAllowSpecificOrigins,
+                      policy  =>
+                      {
+                          policy.WithOrigins("https://localhost:5001/api/signs",
+                                              "http://localhost:8080");
+                      });
+});
 
 builder.Services.AddControllers();
 
@@ -28,6 +40,8 @@ else
 {
   app.UseHttpsRedirection();
 }
+
+app.UseCors(MyAllowSpecificOrigins);
 
 app.UseAuthorization();
 
