@@ -7,13 +7,13 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy(name: MyAllowSpecificOrigins,
-        policy =>
-        {
-            policy.AllowAnyOrigin()
-                  .AllowAnyHeader()
-                  .AllowAnyMethod();
-        });
+  options.AddPolicy(name: MyAllowSpecificOrigins,
+      policy =>
+      {
+        policy.AllowAnyOrigin()
+                .AllowAnyHeader()
+                .AllowAnyMethod();
+      });
 });
 
 builder.Services.AddControllers();
@@ -41,7 +41,8 @@ app.UseSwaggerUI();
 // Enable HTTPS redirection in production
 if (!app.Environment.IsDevelopment())
 {
-    app.UseHttpsRedirection();
+  app.UseSwagger();
+  app.UseSwaggerUI();
 }
 
 app.UseAuthorization();
