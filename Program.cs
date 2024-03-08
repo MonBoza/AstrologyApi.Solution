@@ -34,15 +34,13 @@ var app = builder.Build();
 // Enable CORS
 app.UseCors(MyAllowSpecificOrigins);
 
-// Enable Swagger for API documentation
 app.UseSwagger();
 app.UseSwaggerUI();
 
 // Enable HTTPS redirection in production
 if (!app.Environment.IsDevelopment())
 {
-  app.UseSwagger();
-  app.UseSwaggerUI();
+    app.UseHttpsRedirection();
 }
 
 app.UseAuthorization();
